@@ -26,16 +26,19 @@ function multiply($a, $b = 12) {
     }
 }
 
-function divide($a, $b = 5) {
-  	if (is_numeric($a) && is_numeric($b)) {
-    	echo $a / $b . PHP_EOL;
+function divide($a, $b =5) {
+  	if ((is_numeric($a) && is_numeric($b)) && $b !=0) {
+    	echo $a / $b  . PHP_EOL;
+    }elseif (!is_numeric($a) || !is_numeric($b)) {
+    	echo 'ERROR: both arguments must be numeric' . PHP_EOL;
     }else {
-		echo 'ERROR: Both arguments must be numbers' . PHP_EOL;
+    	echo 'ERROR: value cant be devided by 0' . PHP_EOL;
     }
 }
+    	    
 
 
-function modulus($a, $b = 2) {
+function modulus($a, $b = 6) {
   	if (is_numeric($a) && is_numeric($b)) {
     	echo $a % $b . PHP_EOL;
     }else {
@@ -50,6 +53,8 @@ add(10);
 subtract(3);
 multiply(8);
 divide(65);
+divide(4,0);
+divide(7, 'clam');
 modulus(50);
 
 // $a = 30;
