@@ -1,7 +1,8 @@
 <?php
 
-// Create array to hold list of todo items
 $items = array();
+// Create array to hold list of todo items
+
 // List array items formatted for CLI
 function list_items($items) {
     $array_convert_string = '';
@@ -11,8 +12,8 @@ function list_items($items) {
     // [2] TODO item 2 - blah
     // DO NOT USE ECHO, USE RETURN
     foreach ($items as $key => $item) {
-        $key++;
-        $array_convert_string .= "[{$key}]" . " TODO " . $item . PHP_EOL;
+        $new_index = $key + 1;
+        $array_convert_string .= "[" . $new_index . "]" . " TODO " . $item . PHP_EOL;
     }
 
     return $array_convert_string; 
@@ -32,6 +33,17 @@ function get_input($upper = FALSE) {
     // Return filtered STDIN input
 }
 
+// function sort_menu($sorting = TRUE) {
+//     if ($sorting) {
+//         $sorting = sort(fgets(STDIN)); 
+//         return .= $
+//     }else {
+
+//     } 
+
+// }
+//     echo sort_menu($sorting)
+
 // The loop!
 do {
         echo list_items($items);
@@ -39,7 +51,7 @@ do {
     // Echo the list produced by the function
 
     // Show the menu options
-        echo '(N)ew item, (R)emove item, (Q)uit : ';
+        echo '(N)ew item, (R)emove item, (Q)uit, (S)ort : ';
 
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -57,8 +69,19 @@ do {
         // Get array key
         $key = trim(fgets(STDIN));
         // Remove from array
-        unset($items[$key--]);
-    }
+        unset($items[$key - 1]);
+    } elseif ($input == 'S') {       
+        echo 'choose and option' . PHP_EOL;
+        echo 'press1 to sort from a-z' . PHP_EOL;
+        echo 'press2 to unsort from z-a' . PHP_EOL;
+        $input = trim(fgets(STDIN));
+
+        if ($input == 1) {
+            sort ($items);
+        }else {
+            rsort ($items);
+        }
+    } 
 // Exit when input is (Q)uit
 } while ($input != 'Q');
 
