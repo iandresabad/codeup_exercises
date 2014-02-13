@@ -51,7 +51,7 @@ do {
     // Echo the list produced by the function
 
     // Show the menu options
-        echo '(N)ew item, (R)emove item, (Q)uit, (S)ort : ';
+        echo '(N)ew item, (R)emove item, (Q)uit, (S)ort, (F), (L) : ';
 
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -61,8 +61,21 @@ do {
     if ($input == 'N') {
         // Ask for entry
         echo 'Enter item: ';
+        $input = trim(fgets(STDIN));
         // Add entry to list array
-       $items[] = trim(fgets(STDIN));
+       // $items[] = trim(fgets(STDIN));
+       // asks the uses if they want to add it to the beginning or end
+       echo 'Where do you want the item?' . PHP_EOL;
+       echo 'press1 to put item in the begining' . PHP_EOL;
+       echo 'press2 to put item in the end' . PHP_EOL;
+       // user puts input 
+       $option = trim(fgets(STDIN));
+       // this is function of that option 
+       if ($option == 1) {
+            array_unshift($items, $input);
+       }else {
+            array_push($items, $input);
+       }
     } elseif ($input == 'R') {
         // Remove which item?
         echo 'Enter item number to remove: ';
@@ -81,7 +94,13 @@ do {
         }else {
             rsort ($items);
         }
-    } 
+    } elseif ($input == 'F') {
+        $input = trim(fgets(STDIN));   
+        array_shift($items);
+    } elseif ($input == 'L') {
+        $input = trim(fgets(STDIN));
+        array_pop($items);
+    }
 // Exit when input is (Q)uit
 } while ($input != 'Q');
 
@@ -98,5 +117,12 @@ echo "Goodbye!\n";
 
 // Exit with 0 errors
 exit(0);
+
+// use array_shift to put front and back 
+// use array_unshift to take it away 
+// and use array_push
+// then shift 
+// then pop 
+
 
 ?>
