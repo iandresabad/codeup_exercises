@@ -13,7 +13,7 @@ function list_items($items) {
     // DO NOT USE ECHO, USE RETURN
     foreach ($items as $key => $item) {
         $new_index = $key + 1;
-        $array_convert_string .= "[" . $new_index . "]" . " TODO " . $item . PHP_EOL;
+        $array_convert_string .= "[" . $new_index . "]" . $item . PHP_EOL;
     }
 
     return $array_convert_string; 
@@ -51,7 +51,7 @@ do {
     // Echo the list produced by the function
 
     // Show the menu options
-        echo '(N)ew item, (R)emove item, (Q)uit, (S)ort, (F), (L) : ';
+        echo '(N)ew item, (R)emove item, (Q)uit, (S)ort : ';
 
     // Get the input from user
     // Use trim() to remove whitespace and newlines
