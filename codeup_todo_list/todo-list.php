@@ -1,5 +1,7 @@
 <?php
 
+		$file = "data/todo_list.txt";
+
 		function get_file_added($file) {
 
 	    $handle = fopen($file, "r");
@@ -22,12 +24,12 @@
 
 		}
 
-		$file = "data/todo_list.txt";
 		$items = read_file($file);
 
 
-		    if (!empty($_POST)) {
-		    	array_push($items, $_POST['newItem']);
+		    if (!empty($_POST['newitem'])) {
+		    	$new_item = $_POST['newitem'];
+		    	array_push($items, $_POST['newitem']);
 		    	save_file("data/todo_list.txt", $item);
 		    	header("Location: todo-list.php");
 		    }
@@ -41,7 +43,7 @@
 		$filename = "todo.txt";
 		$items = loadFile($filename);
 
-		if(isset($_POST['newItem'])) {
+		if(isset($_POST['newitem'])) {
 			array_push($items, $item);
 
 			saveFile($filename, $items);
@@ -54,25 +56,29 @@
 			saveFile($filename, $items); 
 		}
 
+		if(filesize($filename) > 0) {
+			$todos = read_file($filename); 
+		}
+
 	?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Making a Todo-list</title>
+	<title>TODO list</title>
 </head>
 <body>
-	<h2>TODO List</h2>
+	<h2>TODOs!</h2>
 	<ul>
 		<?php foreach ($items as $key => $item) { ?>
 		<li><?php echo $item; ?> <a href="?remove=<?php echo $key; ?>">Delete</a></li>
 				<?php } ?>
 	</ul>
 	<h3>Add a TODO list item:</h3>
-	<form method="POST" action="todo-list.php">
+	<form method="POST" action="">
 	<p>
-		<label for="newItem">New Item:</label>
-		<input id="newItem" name="newItem" type="text" autofocus="autofocus">   
+		<label for="newitem">New Item:</label>
+		<input id="newitem" name="newitem" type="text" autofocus="autofocus" autofocus="Add Items to the TODO list">   
 	<button type="submit">Add Item</button>
 	</p>
 </form>
